@@ -18,14 +18,17 @@ RUN apt-get update && apt-get install -y \
     firefox \
     && rm -rf /var/lib/apt/lists/*
 
+
+RUN useradd -ms /bin/bash pentaho && mkdir /opt/pentaho && chown pentaho /opt/pentaho
+USER pentaho
+WORKDIR /home/pentaho
+
 RUN wget -nv https://altushost-swe.dl.sourceforge.net/project/pentaho/Pentaho%209.1/client-tools/pdi-ce-9.1.0.0-324.zip \
     && unzip pdi*.zip -d /opt/pentaho \
     && rm pdi*.zip
 
-RUN useradd -ms /bin/bash pentaho
-USER pentaho
-WORKDIR /home/pentaho
-
+RUN wget https://www.west.nl/pentaho-marketplace/pdi-odoo-plugin-1.0-bin.zip \
+    && unzip pdi-odoo*.zip -d /opt/pentaho/data-integration/plugins
 
 
 COPY ./entrypoint.sh /entrypoint.sh

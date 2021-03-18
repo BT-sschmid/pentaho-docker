@@ -7,7 +7,7 @@ perl -i -p0e 's/#  ODOOPARAMS  #.*?#  ODOOPARAMS  #/`cat new`/se' ~/.kettle/kett
 
 cat > ~/.kettle/kettle.properties << EOF
 #  ODOOPARAMS  #
-db=${db}
+db=$db
 host=$host
 user=$user
 pw=$pw
